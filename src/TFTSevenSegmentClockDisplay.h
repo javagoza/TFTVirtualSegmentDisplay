@@ -1,15 +1,17 @@
 /*!
- * @file TFTSevenSegmentClockDisplay.h
- *
- * This is part of for TFTSevenSegment library
- *
- *
- * Written by Enrique Albertos, with
- * contributions from the open source community.
- *
- * Public Domain
- *
- */
+   @file TFTSevenSegmentClockDisplay.h
+
+   This is part of the TFT Virtual Segment Display for Arduino
+   Virtual seven segments clock display for Arduino TFT LCD Displays
+   Displays a clock with 4 or 6 seven segment modules
+
+
+   Written by Enrique Albertos, with
+   contributions from the open source community.
+
+   Public Domain
+
+*/
 
 #ifndef _TFTSevenSegmentClockDisplay_H_
 #define _TFTSevenSegmentClockDisplay_H_
@@ -19,25 +21,100 @@
 #include <Adafruit_TFTLCD.h> // Hardware-specific library
 #include "TFTSevenSegmentModule.h"
 
-#define DIGITS 6 // number of seven segment modules
+#define DIGITS 6 // number of seven segment modules for the clock display
 
-
+/** Virtual seven segments clock display for Arduino TFT LCD Displays */
 class TFTSevenSegmentClockDisplay {
 
 
   public:
+    /*!
+      @brief Create a TFTSevenSegmentClockDisplay represent a clock display with 4 or 6 seven segment modules
+         @param x                  x coordinate
+         @param y                  y coordinate
+         @param w                  seven segment module width
+         @param h                  seven segment module height
+         @param onColor            565 segment color when led segments are in on state
+         @param offColor           565 segment color when led segment are in off state
+         @param ledWidth           width in pixels of each segment led
+         @param showHours          true show clock with hours-minutes-seconds, false show only minutes-seconds
+         @param secondsHeightRatio reduction factor of the size of the digits representing the seconds
+
+    */
     TFTSevenSegmentClockDisplay(Adafruit_TFTLCD * , int16_t , int16_t , int16_t , int16_t , uint16_t , uint16_t , int16_t , boolean, float );
+
+
+    /*!
+       @brief    Display time from hour, minutes ans seconds
+        @param   hours   number to display on the hours subgroup module
+        @param   hours   number to display on the minutes subgroup module
+        @param   hours   number to display on the seconds siubgroup module
+        @param   units separator estate. true on, false off
+    */
     void display(int16_t ,  int16_t , int16_t, boolean );
+
+    /*!
+      @brief    Display time from seconds
+      @param   timeSeconds   Seconds to be represented as HH:MM:SS
+      @param   units separator estate. true on, false off
+    */
     void displaySeconds(long, boolean );
+
+    /*!
+       @brief    Display time from milliseconds
+        @param   timeMillis   Seconds to be represented as HH:MM:SS
+        @param   units separator estate. true on, false off
+    */
     void displayMillis(long, boolean );
+
+    /*!
+      @brief    Change next drawing position of the display
+      @param x                  x coordinate
+      @param y                  y coordinate
+    */
     void setPosition(int16_t , int16_t );
+
+    /*!
+       @brief    Change next onColor of the led segments
+          @param color   565 segment color when led segments are in on state
+    */
     void setOnColor(uint16_t );
+
+    /*!
+      @brief    Change next offColor of the led segments
+      @param color   565 segment color when led segments are in off state
+    */
     void setOffColor(uint16_t );
-    void setLedWidth(int16_t  );
-    void setSegmentWidth(int16_t  );
-    void setSegmentHeight(int16_t );
-    int16_t getSegmentWidth( ) ;
-    int16_t getSegmentHeight();
+
+    /*!
+      @brief    Change next led width of the segments
+      @param ledWidth   led width in pixels
+    */
+    void setLedSegmentWidth(int16_t  );
+
+    /*!
+       @brief    Change the next seven segment modules width
+          @param w   seven segments width in pixels
+    */
+    void setSegmentModuleWidth(int16_t  );
+
+    /*!
+       @brief    Change the next seven segment modules height
+          @param h   seven segments height in pixels
+    */
+    void setSegmentModuleHeight(int16_t );
+
+    /*!
+      @brief    Get the current seven segments width in pixels
+      @returns the current seven segments width in pixels
+    */
+    int16_t getSegmentModuleWidth( ) ;
+
+    /*!
+      @brief    Get the current seven segments height in pixels
+      @returns the current seven segments height in pixels
+    */
+    int16_t getSegmentModuleHeight();
 
   private:
     Adafruit_TFTLCD * m_tft;
