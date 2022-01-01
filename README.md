@@ -1,4 +1,4 @@
-# TFT Virtual Segment Display for Arduino
+# TFT LCD Virtual Segment Display for Arduino
 TFT LCD Virtual Segment Display Library for Arduino 
 
 ![Display sample](docs/f_20220101_221308.jpg)
