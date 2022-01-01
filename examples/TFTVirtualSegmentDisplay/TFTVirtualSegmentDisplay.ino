@@ -15,7 +15,7 @@
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_TFTLCD.h> // Hardware-specific library
 
-#include "src/TFTSevenSegmentClockDisplay.h"
+#include <TFTSevenSegmentClockDisplay.h>
 
 
 // The control pins for the LCD can be assigned to any digital or
@@ -38,26 +38,25 @@
 #define YELLOW  0xFFE0
 #define WHITE   0xFFFF
 
+long a = 0;
+boolean toggleSeparator = false;
+
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+
 TFTSevenSegmentClockDisplay clockDisplayD(&tft,  120,  0,  9,   12,  YELLOW, tft.color565(20, 20, 20),   1, true, 1);
 TFTSevenSegmentClockDisplay clockDisplayW(&tft,  0,  0,  13,   24,  BLUE, tft.color565(20, 20, 20),   2, true, 1);
 TFTSevenSegmentClockDisplay clockDisplayB(&tft,  0,  30,  26,   48,  RED, tft.color565(20, 20, 20),   4, false , 1);
 TFTSevenSegmentClockDisplay clockDisplayA(&tft,  0,  50,  40,   64, WHITE, tft.color565(20, 20, 20),   6, true, 3.0 / 4.0);
 TFTSevenSegmentClockDisplay clockDisplayC(&tft,  0,  120,  48,   110, CYAN, tft.color565(20, 20, 20),   8, false, .60);
+
 void setup() {
-  // put your setup code here, to run once:
-
   tft.reset();
-
   uint16_t identifier = tft.readID();
-
   tft.begin(identifier);
-
   tft.fillScreen(BLACK);
-
 }
-long a = 0;
-boolean toggleSeparator = false;
+
+
 void loop() {
   showHorizontalClocks();
   showVerticalClocks();
