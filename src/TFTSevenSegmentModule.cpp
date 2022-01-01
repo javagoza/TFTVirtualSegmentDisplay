@@ -67,7 +67,7 @@ void TFTSevenSegmentModule::display(const int16_t digit) {
 */
 void TFTSevenSegmentModule::draw_F_LeftUpperLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastVLine(m_x + i, m_y + i, m_h / 2 - 2 * i, color);
   }
   m_tft->endWrite();
@@ -79,7 +79,7 @@ void TFTSevenSegmentModule::draw_F_LeftUpperLed(uint16_t color) {
 */
 void TFTSevenSegmentModule::draw_E_LeftBottomLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastVLine(m_x + i, m_h / 2 + m_y + i + 1, m_h / 2 - 2 * i, color);
   }
   m_tft->endWrite();
@@ -92,7 +92,7 @@ void TFTSevenSegmentModule::draw_E_LeftBottomLed(uint16_t color) {
 */
 void TFTSevenSegmentModule::draw_B_RightUpperLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastVLine(m_x + m_w - i, m_y + i, m_h / 2 - 2 * i, color);
   }
   m_tft->endWrite();
@@ -105,7 +105,7 @@ void TFTSevenSegmentModule::draw_B_RightUpperLed(uint16_t color) {
 */
 void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastVLine(m_x + m_w - i, m_y + m_h / 2 + i + 1, m_h / 2 - 2 * i, color);
   }
   m_tft->endWrite();
@@ -119,7 +119,7 @@ void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
 void TFTSevenSegmentModule::draw_G_MiddleLed(uint16_t color) {
   m_tft->startWrite();
   int ledWidth = m_ledWidth < 2 ? 1 : m_ledWidth / 2;
-  for (uint16_t i = 0;  i < ledWidth ; i++) {
+  for (int i = 0;  i < ledWidth ; i++) {
     m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 - i, m_w - 2 * i - 4, color);
     if (m_ledWidth > 1) {
       m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 + i + 1, m_w - 2 * i - 4, color);
@@ -134,7 +134,7 @@ void TFTSevenSegmentModule::draw_G_MiddleLed(uint16_t color) {
 */
 void TFTSevenSegmentModule::draw_A_UpperLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastHLine(m_x + i + 3, m_y + i, m_w - 2 * i - 5, color);
   }
   m_tft->endWrite();
@@ -147,7 +147,7 @@ void TFTSevenSegmentModule::draw_A_UpperLed(uint16_t color) {
 */
 void TFTSevenSegmentModule::draw_D_BottomLed(uint16_t color) {
   m_tft->startWrite();
-  for (uint16_t i = 0; i < m_ledWidth; i++) {
+  for (int i = 0; i < m_ledWidth; i++) {
     m_tft->writeFastHLine(m_x + i + 3, m_y + m_h - i, m_w - 2 * i - 5, color);
   }
   m_tft->endWrite();
