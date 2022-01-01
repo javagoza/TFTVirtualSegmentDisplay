@@ -237,3 +237,12 @@ int16_t TFTSevenSegmentClockDisplay::getSegmentModuleWidth() {
 int16_t TFTSevenSegmentClockDisplay::getSegmentModuleHeight() {
   return m_h;
 }
+
+/*!
+   @brief destructor deallocate memory reserved for seven segment modules
+*/
+TFTSevenSegmentClockDisplay::~TFTSevenSegmentClockDisplay() {
+  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
+    delete digits[i];
+  }
+}
