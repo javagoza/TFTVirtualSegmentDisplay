@@ -192,7 +192,7 @@ void TFTSevenSegmentClockDisplay::setPosition(int16_t x, int16_t y) {
       @param color   565 segment color when led segments are in on state
 */
 void TFTSevenSegmentClockDisplay::setOnColor(uint16_t color) {
-  for (int i = 0; i < DIGITS; i++) {
+  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
     digits[i]->setOnColor(color);
   }
   m_onColor = color;
@@ -204,7 +204,7 @@ void TFTSevenSegmentClockDisplay::setOnColor(uint16_t color) {
       @param color   565 segment color when led segments are in off state
 */
 void TFTSevenSegmentClockDisplay::setOffColor(uint16_t color) {
-  for (int i = 0; i < DIGITS; i++) {
+  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
     digits[i]->setOffColor(color);
   }
   m_offColor = color;
@@ -215,7 +215,7 @@ void TFTSevenSegmentClockDisplay::setOffColor(uint16_t color) {
       @param ledWidth   led width in pixels
 */
 void TFTSevenSegmentClockDisplay::setLedSegmentWidth(int16_t ledWidth) {
-  for (int i = 0; i < DIGITS; i++) {
+  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
     digits[i]->setLedWidth(ledWidth);
   }
   m_ledWidth = ledWidth;
@@ -254,14 +254,6 @@ int16_t TFTSevenSegmentClockDisplay::getSegmentModuleHeight() {
   return digits[MM1]->getHeight();
 }
 
-/*!
-   @brief destructor deallocate memory reserved for seven segment modules
-*/
-TFTSevenSegmentClockDisplay::~TFTSevenSegmentClockDisplay() {
-  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
-    delete digits[i];
-  }
-}
 
 /*!
   @brief    Get the current width in pixels
@@ -275,7 +267,6 @@ int16_t TFTSevenSegmentClockDisplay::getWidth(){
   }
 }
 
-
 /*!
   @brief    Get the current height in pixels
   @returns the height in pixels
@@ -288,5 +279,11 @@ int16_t TFTSevenSegmentClockDisplay::getHeight() {
   }
 }
 
-
-
+/*!
+   @brief destructor deallocate memory reserved for seven segment modules
+*/
+TFTSevenSegmentClockDisplay::~TFTSevenSegmentClockDisplay() {
+  for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
+    delete digits[i];
+  }
+}
