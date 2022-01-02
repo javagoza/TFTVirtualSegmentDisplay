@@ -42,10 +42,10 @@ class TFTSevenSegmentClockDisplay {
 
     */
     TFTSevenSegmentClockDisplay(Adafruit_TFTLCD * , int16_t , int16_t , int16_t , int16_t , uint16_t , uint16_t , int16_t , boolean, float );
-    
+
     /*!
-     * @brief destructor deallocate memory reserved for seven segment modules
-     */
+       @brief destructor deallocate memory reserved for seven segment modules
+    */
     ~TFTSevenSegmentClockDisplay();
 
     /*!

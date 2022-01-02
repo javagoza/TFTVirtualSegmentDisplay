@@ -265,5 +265,5 @@ int16_t TFTSevenSegmentModule::getHeight() {
   @returns the current seven segments height in pixels
 */
 int16_t TFTSevenSegmentModule::getLedWidth() {
-   return m_ledWidth;
+  return m_ledWidth;
 }

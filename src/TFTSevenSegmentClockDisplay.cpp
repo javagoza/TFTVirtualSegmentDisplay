@@ -13,6 +13,12 @@
 
 #include "TFTSevenSegmentClockDisplay.h"
 
+
+#define SECONDS_IN_MINUTE 60
+#define MINUTES_IN_HOUR 60
+#define HOURS_IN_DAY 24
+#define MILLIS_IN_SECOND 1000
+
 /*!
    @brief Create a TFTSevenSegmentClockDisplay represent a clock display with 4 or 6 seven segment modules
    @param tft                pointer to Adafruit_TFTLCD
@@ -56,24 +62,24 @@ TFTSevenSegmentClockDisplay::TFTSevenSegmentClockDisplay(
   for (int i = m_showHours ? 0 : 2; i < DIGITS; i++) {
     if (i < SS2 ) {
       offsetx = digit * (w + w / 8 + 3) + groupOffset;
-    } else {      
+    } else {
       offsetx = offsetx + (w  + w / 8 ) * m_secondsHeightRatio + 3;
     }
 
-    if (i>MM2 && m_ledWidth > 2) {
+    if (i > MM2 && m_ledWidth > 2) {
       segmentWidth = m_ledWidth * m_secondsHeightRatio + 1;
-    } 
+    }
 
-    digits[i] = new TFTSevenSegmentModule(tft, 
-      x + offsetx ,
-      y,
-      w,
-      h,
-      m_onColor,
-      m_offColor,
-      segmentWidth,
-      true);
-    
+    digits[i] = new TFTSevenSegmentModule(tft,
+                                          x + offsetx ,
+                                          y,
+                                          w,
+                                          h,
+                                          m_onColor,
+                                          m_offColor,
+                                          segmentWidth,
+                                          true);
+
     ++digit;
 
     if (i % 2 != 0) {
@@ -85,12 +91,6 @@ TFTSevenSegmentClockDisplay::TFTSevenSegmentClockDisplay(
   digits[SS1]->setWidth((float)w * m_secondsHeightRatio);
   digits[SS2]->setWidth((float)w * m_secondsHeightRatio);
 }
-
-#define SECONDS_IN_MINUTE 60
-#define MINUTES_IN_HOUR 60
-#define HOURS_IN_DAY 24
-#define MILLIS_IN_SECOND 1000
-
 
 /*!
    @brief    Display time from seconds
@@ -148,31 +148,31 @@ void TFTSevenSegmentClockDisplay::display(int16_t hours, int16_t minutes, int16_
 
     digits[HH2]->display(hours % 10);
 
-    m_tft->fillRect(digits[HH2]->getX() + digits[HH2]->getWidth()+ (digits[MM1]->getX() - (digits[HH2]->getX() + digits[HH2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
-                      digits[HH2]->getY() + digits[MM1]->getHeight() / 4,
-                      m_ledWidth/2+1 ,
-                      m_ledWidth/2+1 ,
-                      isSeparatorOn == true ? m_onColor : m_offColor);
+    m_tft->fillRect(digits[HH2]->getX() + digits[HH2]->getWidth() + (digits[MM1]->getX() - (digits[HH2]->getX() + digits[HH2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
+                    digits[HH2]->getY() + digits[MM1]->getHeight() / 4,
+                    m_ledWidth / 2 + 1 ,
+                    m_ledWidth / 2 + 1 ,
+                    isSeparatorOn == true ? m_onColor : m_offColor);
 
     m_tft->fillRect(digits[HH2]->getX()
-                      + digits[HH2]->getWidth() + (digits[MM1]->getX() - (digits[HH2]->getX() + digits[HH2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
-                      digits[HH2]->getY() + 3 * digits[MM1]->getHeight() / 4 -  digits[MM1]->getLedWidth() / 2,
-                      m_ledWidth/2+1 ,
-                      m_ledWidth/2+1 ,
-                      isSeparatorOn == true ? m_onColor : m_offColor);
+                    + digits[HH2]->getWidth() + (digits[MM1]->getX() - (digits[HH2]->getX() + digits[HH2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
+                    digits[HH2]->getY() + 3 * digits[MM1]->getHeight() / 4 -  digits[MM1]->getLedWidth() / 2,
+                    m_ledWidth / 2 + 1 ,
+                    m_ledWidth / 2 + 1 ,
+                    isSeparatorOn == true ? m_onColor : m_offColor);
 
     m_tft->fillRect(digits[MM2]->getX() + digits[MM2]->getWidth() + (digits[SS1]->getX() - (digits[MM2]->getX() + digits[MM2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
-                      digits[MM2]->getY() + digits[SS1]->getHeight() / 4,
-                      m_ledWidth/2+1 ,
-                      m_ledWidth/2+1 ,
-                      isSeparatorOn == true ? m_onColor : m_offColor);
+                    digits[MM2]->getY() + digits[SS1]->getHeight() / 4,
+                    m_ledWidth / 2 + 1 ,
+                    m_ledWidth / 2 + 1 ,
+                    isSeparatorOn == true ? m_onColor : m_offColor);
 
     m_tft->fillRect(digits[MM2]->getX()
-                      + digits[MM2]->getWidth() + (digits[SS1]->getX() - (digits[MM2]->getX() + digits[MM2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
-                      digits[MM2]->getY() + 3 * digits[SS1]->getHeight() / 4 -  digits[MM1]->getLedWidth() / 2,
-                      m_ledWidth/2+1 ,
-                      m_ledWidth/2+1 ,
-                      isSeparatorOn == true ? m_onColor : m_offColor);
+                    + digits[MM2]->getWidth() + (digits[SS1]->getX() - (digits[MM2]->getX() + digits[MM2]->getWidth())) / 2 -  digits[MM1]->getLedWidth() / 4,
+                    digits[MM2]->getY() + 3 * digits[SS1]->getHeight() / 4 -  digits[MM1]->getLedWidth() / 2,
+                    m_ledWidth / 2 + 1 ,
+                    m_ledWidth / 2 + 1 ,
+                    isSeparatorOn == true ? m_onColor : m_offColor);
   }
 }
 
