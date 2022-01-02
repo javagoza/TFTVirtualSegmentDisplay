@@ -124,6 +124,13 @@ class TFTSevenSegmentModule {
     */
     int16_t getHeight();
 
+    /*!
+      @brief    Get the current led segment with in pixels
+      @returns the current seven segments height in pixels
+    */
+    int16_t getLedWidth();
+
+
 
   private:
     Adafruit_TFTLCD * m_tft;

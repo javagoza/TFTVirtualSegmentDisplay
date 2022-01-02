@@ -119,7 +119,7 @@ void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
 void TFTSevenSegmentModule::draw_G_MiddleLed(uint16_t color) {
   m_tft->startWrite();
   int ledWidth = m_ledWidth < 2 ? 1 : m_ledWidth / 2;
-  for (int i = 0;  i < ledWidth ; i++) {
+  for (int i = 0;  i < ledWidth + m_ledWidth % 2 ; i++) {
     m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 - i, m_w - 2 * i - 4, color);
     if (m_ledWidth > 1) {
       m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 + i + 1, m_w - 2 * i - 4, color);
@@ -258,4 +258,12 @@ int16_t TFTSevenSegmentModule::getWidth() {
 */
 int16_t TFTSevenSegmentModule::getHeight() {
   return m_h;
+}
+
+/*!
+  @brief    Get the current led segment with in pixels
+  @returns the current seven segments height in pixels
+*/
+int16_t TFTSevenSegmentModule::getLedWidth() {
+   return m_ledWidth;
 }
