@@ -41,7 +41,8 @@ boolean toggleSeparator = false;
 #define WHITE 0xFFFF
 
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
-TFTSevenSegmentClockDisplay clockDisplayD(&tft, 120, 0, 8, 12, YELLOW, tft.color565(20, 20, 20), 1, true, 1);
+TFTSevenSegmentClockDisplay clockDisplayP(&tft, 120, 0, 4, 6, GREEN, tft.color565(20, 20, 20), 1, true, 1);
+TFTSevenSegmentClockDisplay clockDisplayD(&tft, 120, 30, 8, 12, YELLOW, tft.color565(20, 20, 20), 1, true, 1);
 TFTSevenSegmentClockDisplay clockDisplayW(&tft, 0, 0, 13, 24, BLUE, tft.color565(20, 20, 20), 2, true, 1);
 TFTSevenSegmentClockDisplay clockDisplayB(&tft, 0, 30, 26, 48, RED, tft.color565(20, 20, 20), 4, false, 1);
 TFTSevenSegmentClockDisplay clockDisplayA(&tft, 0, 50, 40, 80, YELLOW, tft.color565(20, 20, 20), 10, true, .5);
@@ -62,14 +63,15 @@ void setup() {
 void loop() {
   showHorizontalClocks();
   showVerticalClocks();
-  // tft.setRotation(1);
-  // clockDisplayA.displaySeconds(86399 , true);
+  tft.setRotation(1);
+  //clockDisplayA.displaySeconds(86399 , true);
 }
 
 void showVerticalClocks() {
   tft.fillScreen(BLACK);
   for (int i = 1; i < 180; i++) {
     tft.setRotation(0);
+    clockDisplayP.displaySeconds(a, toggleSeparator);
     clockDisplayD.displaySeconds(a, toggleSeparator);
     clockDisplayB.displaySeconds(a, toggleSeparator);
     clockDisplayW.displaySeconds(86400 - a, toggleSeparator);
@@ -85,6 +87,7 @@ void showHorizontalClocks() {
   tft.fillScreen(BLACK);
   for (int i = 1; i < 180; i++) {
     tft.setRotation(1);
+    clockDisplayP.displaySeconds(a, toggleSeparator);
     clockDisplayD.displaySeconds(a, toggleSeparator);
     clockDisplayW.displaySeconds(a, toggleSeparator);
     clockDisplayA.displaySeconds(86400 - a, toggleSeparator);
