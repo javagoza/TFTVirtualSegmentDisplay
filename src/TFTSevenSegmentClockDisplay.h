@@ -120,6 +120,19 @@ class TFTSevenSegmentClockDisplay {
     */
     int16_t getSegmentModuleHeight();
 
+    /*!
+      @brief    Get the current width in pixels
+      @returns the current seven segments width in pixels
+    */
+    int16_t getWidth();
+
+
+    /*!
+      @brief    Get the current height in pixels
+      @returns the current seven segments height in pixels
+    */
+    int16_t getHeight();
+
   private:
     Adafruit_TFTLCD * m_tft;
     int16_t m_x{};

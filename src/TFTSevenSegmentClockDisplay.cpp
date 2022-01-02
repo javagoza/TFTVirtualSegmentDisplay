@@ -262,3 +262,31 @@ TFTSevenSegmentClockDisplay::~TFTSevenSegmentClockDisplay() {
     delete digits[i];
   }
 }
+
+/*!
+  @brief    Get the current width in pixels
+  @returns the width in pixels
+*/
+int16_t TFTSevenSegmentClockDisplay::getWidth(){
+  if (m_showHours) {
+    return digits[SS2]->getX() + digits[SS2]->getWidth() - digits[HH1]->getX();
+  } else {
+    return digits[SS2]->getX() + digits[SS2]->getWidth() - digits[MM1]->getX();
+  }
+}
+
+
+/*!
+  @brief    Get the current height in pixels
+  @returns the height in pixels
+*/
+int16_t TFTSevenSegmentClockDisplay::getHeight() {
+  if (digits[SS1]->getHeight() > digits[MM1]->getHeight() ) {
+    return digits[SS1]->getHeight() ;
+  } else {
+    return digits[MM1]->getHeight() ;
+  }
+}
+
+
+
