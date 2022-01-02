@@ -1,4 +1,6 @@
 /*!
+
+
    @file TFTSevenSegmentClockDisplay.h
 
   This is part of the TFT Virtual Segment Display for Arduino
@@ -31,24 +33,24 @@ const unsigned char digitCodeMap[] = {
 };
 
 /*!
-   @brief Create a TFTSevenSegmentModule represent a seven segment module than can display one digit
-      @param tft       pointer to Adafruit_TFTLCD
-      @param x         x coordinate
-      @param y         y coordinate
-      @param w         seven segment module width
-      @param h         seven segment module height
-      @param onColor   565 segment color when led segments are in on state
-      @param offColor  565 segment color when led segment are in off state
-      @param ledWidth  width in pixels of each segment led
-      @param on        segment on state, true on state, false off state
+  @brief Create a TFTSevenSegmentModule represent a seven segment module than can display one digit
+   @param tft       pointer to Adafruit_TFTLCD
+   @param x         x coordinate
+   @param y         y coordinate
+   @param w         seven segment module width
+   @param h         seven segment module height
+   @param onColor   565 segment color when led segments are in on state
+   @param offColor  565 segment color when led segment are in off state
+   @param ledWidth  width in pixels of each segment led
+   @param on        segment on state, true on state, false off state
 
 */
 TFTSevenSegmentModule::TFTSevenSegmentModule(Adafruit_TFTLCD* tft, int16_t x = 0, int16_t y = 0, int16_t w = 16, int16_t h = 32, uint16_t onColor = 0, uint16_t offColor = 0, int16_t ledWidth = 3, boolean on = true)
-  : m_tft{tft}, m_x{x}, m_y{y}, m_w{w}, m_h{h}, m_onColor{onColor}, m_offColor{offColor}, m_ledWidth{ledWidth}, m_on{on} {};
+  : m_tft{ tft }, m_x{ x }, m_y{ y }, m_w{ w }, m_h{ h }, m_onColor{ onColor }, m_offColor{ offColor }, m_ledWidth{ ledWidth }, m_on{ on } {};
 
 /*!
-   @brief    Display digit 0 to 9
-    @param   digit to display
+  @brief    Display digit 0 to 9
+  @param   digit to display
 */
 void TFTSevenSegmentModule::display(const int16_t digit) {
   const byte leds = digitCodeMap[digit];
@@ -62,8 +64,8 @@ void TFTSevenSegmentModule::display(const int16_t digit) {
 }
 
 /*!
-   @brief    Draw F led Left Upper LED segment
-    @param   565 segement color
+  @brief    Draw F led Left Upper LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_F_LeftUpperLed(uint16_t color) {
   m_tft->startWrite();
@@ -74,8 +76,8 @@ void TFTSevenSegmentModule::draw_F_LeftUpperLed(uint16_t color) {
 }
 
 /*!
-   @brief    Draw E led Left Bottom LED segment
-    @param   565 segement color
+  @brief    Draw E led Left Bottom LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_E_LeftBottomLed(uint16_t color) {
   m_tft->startWrite();
@@ -87,8 +89,8 @@ void TFTSevenSegmentModule::draw_E_LeftBottomLed(uint16_t color) {
 
 
 /*!
-   @brief    Draw B led Right Upper LED segment
-    @param   565 segement color
+  @brief    Draw B led Right Upper LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_B_RightUpperLed(uint16_t color) {
   m_tft->startWrite();
@@ -99,9 +101,10 @@ void TFTSevenSegmentModule::draw_B_RightUpperLed(uint16_t color) {
 }
 
 
+
 /*!
-   @brief    Draw C led Right Bottom LED segment
-    @param   565 segement color
+  @brief    Draw C led Right Bottom LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
   m_tft->startWrite();
@@ -113,42 +116,55 @@ void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
 
 
 /*!
-   @brief    Draw G led Middle LED segment
-    @param   565 segement color
+  @brief    Draw G led Middle LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_G_MiddleLed(uint16_t color) {
   m_tft->startWrite();
-  int ledWidth = m_ledWidth < 2 ? 1 : m_ledWidth / 2;
-  for (int i = 0;  i < ledWidth + m_ledWidth % 2 ; i++) {
-    m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 - i, m_w - 2 * i - 4, color);
-    if (m_ledWidth > 1) {
-      m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 + i + 1, m_w - 2 * i - 4, color);
+  if (m_ledWidth < 2) {
+    m_tft->writeFastHLine(m_x, m_y + m_h / 2, m_w, color);
+  } else {
+    int ledWidth = m_ledWidth < 2 ? 1 : m_ledWidth / 2;
+    for (int i = 0; i < ledWidth + m_ledWidth % 2; i++) {
+      m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 - i, m_w - 2 * i - 4, color);
+      if (m_ledWidth > 1) {
+        m_tft->writeFastHLine(m_x + i + 2, m_y + m_h / 2 + i + 1, m_w - 2 * i - 4, color);
+      }
     }
   }
   m_tft->endWrite();
 }
 
 /*!
-   @brief    Draw A led Upper LED segment
-    @param   565 segement color
+  @brief    Draw A led Upper LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_A_UpperLed(uint16_t color) {
   m_tft->startWrite();
-  for (int i = 0; i < m_ledWidth; i++) {
-    m_tft->writeFastHLine(m_x + i + 3, m_y + i, m_w - 2 * i - 5, color);
+  if (m_ledWidth < 2) {
+    m_tft->writeFastHLine(m_x , m_y , m_w , color);
+  } else {
+    for (int i = 0; i < m_ledWidth; i++) {
+      m_tft->writeFastHLine(m_x + i + 3, m_y + i, m_w - 2 * i - 5, color);
+    }
   }
   m_tft->endWrite();
+
 }
 
 
 /*!
-   @brief    Draw D led Bottom LED segment
-    @param   565 segement color
+  @brief    Draw D led Bottom LED segment
+  @param   565 segement color
 */
 void TFTSevenSegmentModule::draw_D_BottomLed(uint16_t color) {
   m_tft->startWrite();
-  for (int i = 0; i < m_ledWidth; i++) {
-    m_tft->writeFastHLine(m_x + i + 3, m_y + m_h - i, m_w - 2 * i - 5, color);
+  if (m_ledWidth < 2) {
+    m_tft->writeFastHLine(m_x, m_y + m_h , m_w, color);
+  } else {
+    for (int i = 0; i < m_ledWidth; i++) {
+      m_tft->writeFastHLine(m_x + i + 3, m_y + m_h - i, m_w - 2 * i - 5, color);
+    }
   }
   m_tft->endWrite();
 }
@@ -164,8 +180,8 @@ void TFTSevenSegmentModule::setPosition(int16_t x, int16_t y) {
 }
 
 /*!
-   @brief    Change next onColor of the led segments
-      @param color   565 segment color when led segments are in on state
+  @brief    Change next onColor of the led segments
+   @param color   565 segment color when led segments are in on state
 */
 void TFTSevenSegmentModule::setOnColor(uint16_t color) {
   m_onColor = color;
@@ -207,7 +223,7 @@ void TFTSevenSegmentModule::setHeight(const int16_t h) {
 
 /*!
   @brief    Change Adafruit_TFTLCD instance to display on
-     @param tft                pointer to Adafruit_TFTLCD
+  @param tft                pointer to Adafruit_TFTLCD
 */
 void TFTSevenSegmentModule::setTft(Adafruit_TFTLCD* tft) {
   m_tft = tft;

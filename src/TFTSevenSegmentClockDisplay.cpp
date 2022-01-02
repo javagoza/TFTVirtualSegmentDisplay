@@ -239,21 +239,19 @@ void TFTSevenSegmentClockDisplay::setSegmentModuleHeight(int16_t h) {
 }
 
 /*!
-   @brief    Get the current seven segments width in pixels
+   @brief    Get the current seven segment base width in pixels
       @returns the current seven segments width in pixels
 */
 int16_t TFTSevenSegmentClockDisplay::getSegmentModuleWidth() {
-  //TODO
-  return -1;
-
+  return digits[MM1]->getWidth();
 }
 
 /*!
-   @brief    Get the current seven segments height in pixels
+   @brief    Get the current seven segments base height in pixels
       @returns the current seven segments height in pixels
 */
 int16_t TFTSevenSegmentClockDisplay::getSegmentModuleHeight() {
-  return m_h;
+  return digits[MM1]->getHeight();
 }
 
 /*!
