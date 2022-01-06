@@ -122,7 +122,7 @@ void TFTSevenSegmentModule::draw_C_RightBottomLed(uint16_t color) {
 void TFTSevenSegmentModule::draw_G_MiddleLed(uint16_t color) {
   m_tft->startWrite();
   if (m_ledWidth < 2) {
-    m_tft->writeFastHLine(m_x, m_y + m_h / 2, m_w, color);
+    m_tft->writeFastHLine(m_x+1, m_y + m_h / 2, m_w, color);
   } else {
     int ledWidth = m_ledWidth < 2 ? 1 : m_ledWidth / 2;
     for (int i = 0; i < ledWidth + m_ledWidth % 2; i++) {

@@ -19,6 +19,32 @@
 #define HOURS_IN_DAY 24
 #define MILLIS_IN_SECOND 1000
 
+
+/*!
+   @brief Create a TFTSevenSegmentClockDisplay represent a clock display with 4 or 6 seven segment modules
+   @param tft                pointer to Adafruit_TFTLCD
+   @param x                  x coordinate
+   @param y                  y coordinate
+   @param w                  seven segment module width
+   @param h                  seven segment module height
+   @param onColor            565 segment color when led segments are in on state
+   @param offColor           565 segment color when led segment are in off state
+   @param ledWidth           width in pixels of each segment led
+
+*/
+TFTSevenSegmentClockDisplay::TFTSevenSegmentClockDisplay(
+  Adafruit_TFTLCD* tft,
+  int16_t x = 0,
+  int16_t y = 0,
+  int16_t w = 16,
+  int16_t h = 32,
+  uint16_t onColor = 255,
+  uint16_t offColor = 0,
+  int16_t ledWidth = 3) {
+  TFTSevenSegmentClockDisplay(tft, x, y, w, h, onColor, offColor, ledWidth, true, 1.0);
+}
+
+
 /*!
    @brief Create a TFTSevenSegmentClockDisplay represent a clock display with 4 or 6 seven segment modules
    @param tft                pointer to Adafruit_TFTLCD
@@ -43,18 +69,12 @@ TFTSevenSegmentClockDisplay::TFTSevenSegmentClockDisplay(
   uint16_t offColor = 0,
   int16_t ledWidth = 3,
   boolean showHours = true,
-  float secondsHeightRatio = 3 / 4):
-  m_tft{tft},
-  m_x{x},
-  m_y{y},
-  m_w{w},
-  m_h{h},
-  m_onColor{onColor},
-  m_offColor{offColor},
-  m_ledWidth{ledWidth},
+  float secondsHeightRatio = 3 / 4)
+  :
+  TFTSevenSegmentDisplay (tft, x, y, w, h, onColor, offColor, ledWidth),
   m_showHours{showHours},
-  m_secondsHeightRatio{secondsHeightRatio} {
-
+  m_secondsHeightRatio{secondsHeightRatio}
+{
   int groupOffset = 0;
   int digit = 0;
   int offsetx = 0;
@@ -178,16 +198,6 @@ void TFTSevenSegmentClockDisplay::display(int16_t hours, int16_t minutes, int16_
 
 
 /*!
-   @brief    Change next drawing position of the display
-      @param x                  x coordinate
-      @param y                  y coordinate
-*/
-void TFTSevenSegmentClockDisplay::setPosition(int16_t x, int16_t y) {
-  m_x = x;
-  m_y = y;
-}
-
-/*!
    @brief    Change next onColor of the led segments
       @param color   565 segment color when led segments are in on state
 */
@@ -259,7 +269,7 @@ int16_t TFTSevenSegmentClockDisplay::getSegmentModuleHeight() {
   @brief    Get the current width in pixels
   @returns the width in pixels
 */
-int16_t TFTSevenSegmentClockDisplay::getWidth(){
+int16_t TFTSevenSegmentClockDisplay::getWidth() {
   if (m_showHours) {
     return digits[SS2]->getX() + digits[SS2]->getWidth() - digits[HH1]->getX();
   } else {
@@ -277,6 +287,10 @@ int16_t TFTSevenSegmentClockDisplay::getHeight() {
   } else {
     return digits[MM1]->getHeight() ;
   }
+}
+
+void TFTSevenSegmentClockDisplay::paint() {
+
 }
 
 /*!
