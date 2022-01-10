@@ -8,3 +8,7 @@ TFT LCD Virtual Segment Display Library for Arduino
 ![Display sample](docs/cover.jpg)
 
 This library allows to display different virtual segment displays on a TFT LCD using Adafruit TFTLCD Library https://github.com/adafruit/TFTLCD-Library
+
+# Projects using this library
+
+[Arduino TFT Chess Clock](https://github.com/javagoza/ArduinoTFTChessClock)
