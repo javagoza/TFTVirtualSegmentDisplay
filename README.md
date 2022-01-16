@@ -2,8 +2,11 @@
 
 TFT LCD Virtual Segment Display Library for Arduino 
 
-[Arduino UNO Chess Clock TFT LCD Virtual Clock Display Library element14 Blog](https://community.element14.com/challenges-projects/project14/buildapresent/b/blog/posts/arduino-uno-chess-clock-_2d00_-tft-lcd-virtual-clock-display-library)
+Project blogs on element14.com:
 
+[Arduino UNO TFT LCD Virtual Clock Display Library](https://community.element14.com/challenges-projects/project14/buildapresent/b/blog/posts/arduino-uno-chess-clock-_2d00_-tft-lcd-virtual-clock-display-library)
+
+[Arduino UNO TFT LCD Chess Clock with full time controls element14 Blog](https://community.element14.com/challenges-projects/project14/buildapresent/b/blog/posts/arduino-uno-tft-lcd-touch-digital-chess-clock)
 
 ![Display sample](docs/cover.jpg)
 
